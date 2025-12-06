@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - RentEase 2.0</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/chat.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">RentEase 2.0</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li id="addPropertyNavLink"><a href="add-property.html">Add Property</a></li>
+                <li><a href="chat.html" class="active">Messages</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Chat Section -->
+    <section class="chat-section section">
+        <div class="container">
+            <div class="chat-container card">
+                <!-- Conversations List -->
+                <div class="conversations-panel">
+                    <div class="conversations-header">
+                        <h2>Messages</h2>
+                        <button class="new-chat-btn" title="New Chat">💬</button>
+                    </div>
+
+                    <div class="search-box">
+                        <input type="text" class="form-control" placeholder="Search conversations..." id="searchConversations">
+                    </div>
+
+                    <div class="conversations-list" id="conversationsList">
+                        <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                            <p>Loading conversations...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Window -->
+                <div class="chat-panel">
+                    <!-- Chat Header -->
+                    <div class="chat-header">
+                        <div class="chat-user-info">
+                            <div class="chat-avatar">👤</div>
+                            <div>
+                                <h3 id="chatUserName">Select a conversation</h3>
+                                <span class="chat-status">Offline</span>
+                            </div>
+                        </div>
+                        <div class="chat-actions">
+                            <button class="chat-action-btn" title="View Property">🏠</button>
+                            <button class="chat-action-btn" title="More Options">⋮</button>
+                        </div>
+                    </div>
+
+                    <!-- Messages Area -->
+                    <div class="messages-area" id="messagesArea">
+                        <p style="text-align: center; padding: 40px; color: #666;">
+                            Select a conversation to start chatting
+                        </p>
+                    </div>
+
+                    <!-- Message Input -->
+                    <div class="message-input-area">
+                        <form class="message-form" id="messageForm">
+                            <button type="button" class="attach-btn" title="Attach File">📎</button>
+                            <input type="text" class="message-input" id="messageInput" placeholder="Type a message..." autocomplete="off">
+                            <button type="submit" class="send-btn" title="Send Message">📤</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RentEase 2.0</h3>
+                    <p>Your trusted platform for buying, selling, and renting properties.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="../index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📧 info@rentease.com</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>📍 123 Real Estate Ave, City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RentEase 2.0. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/chat.js"></script>
+</body>
+</html>

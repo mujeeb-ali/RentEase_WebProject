@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentEase 2.0 - Smart Property Buy, Sell & Rent</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">RentEase 2.0</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="pages/about.html">About</a></li>
+                <li><a href="pages/contact.html">Contact</a></li>
+                <li><a href="pages/login.html">Login</a></li>
+                <li><a href="pages/signup.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-image-slider">
+                <div class="hero-slide active"></div>
+                <div class="hero-slide"></div>
+                <div class="hero-slide"></div>
+            </div>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content animate-slide-left">
+                <h1 class="hero-title">Connect Directly. No Agents. No Middlemen.</h1>
+                <p class="hero-subtitle">Buy, Sell, or Rent Properties Peer-to-Peer - Save Money, Save Time</p>
+                <div class="hero-buttons">
+                    <a href="pages/signup.html" class="btn btn-primary">Get Started</a>
+                    <a href="pages/about.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section section">
+        <div class="container">
+            <div class="search-card card">
+                <form class="search-form">
+                    <div class="search-grid">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Location" id="searchLocation">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="searchType">
+                                <option value="">Property Type</option>
+                                <option value="house">House</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="villa">Villa</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="searchCategory">
+                                <option value="">Category</option>
+                                <option value="rent">For Rent</option>
+                                <option value="buy">For Sale</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary search-btn">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Saves You Money Section -->
+    <section class="savings-section section">
+        <div class="container">
+            <h2 class="section-title">See How Much You Save Without Agents</h2>
+            <div class="savings-comparison">
+                <div class="comparison-card with-agent">
+                    <h3>❌ Traditional with Agent</h3>
+                    <div class="price-breakdown">
+                        <div class="price-item">
+                            <span>Property Price</span>
+                            <span>$300,000</span>
+                        </div>
+                        <div class="price-item highlight-red">
+                            <span>Agent Commission (5-6%)</span>
+                            <span>-$18,000</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Hidden Fees</span>
+                            <span>-$2,000</span>
+                        </div>
+                        <div class="price-item total">
+                            <span>You Pay/Receive</span>
+                            <span>$280,000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-vs">VS</div>
+                <div class="comparison-card with-rentease">
+                    <h3>✅ RentEase 2.0 (No Agent)</h3>
+                    <div class="price-breakdown">
+                        <div class="price-item">
+                            <span>Property Price</span>
+                            <span>$300,000</span>
+                        </div>
+                        <div class="price-item highlight-green">
+                            <span>Agent Commission</span>
+                            <span>$0</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Platform Fee</span>
+                            <span>$0</span>
+                        </div>
+                        <div class="price-item total">
+                            <span>You Pay/Receive</span>
+                            <span>$300,000</span>
+                        </div>
+                    </div>
+                    <div class="savings-badge">Save $20,000! 💰</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-target="2500">0</div>
+                    <div class="stat-label">Properties Listed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="1800">0</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Direct Deals Closed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="0">$0</div>
+                    <div class="stat-label">Agent Fees</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features section">
+        <div class="container">
+            <h2 class="section-title">Why Go Direct with RentEase 2.0?</h2>
+            <div class="grid grid-3">
+                <div class="feature-card card animate-on-scroll">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Zero Commission</h3>
+                    <p>No agent fees, no hidden charges. Keep 100% of your money when buying or selling properties.</p>
+                </div>
+                <div class="feature-card card animate-on-scroll">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>Direct Communication</h3>
+                    <p>Talk directly with property owners and buyers. No middlemen, no delays, complete transparency.</p>
+                </div>
+                <div class="feature-card card animate-on-scroll">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                    </div>
+                    <h3>Full Control</h3>
+                    <p>Manage your listings, negotiate prices, and close deals on your own terms without agent pressure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties Section -->
+    <section class="properties section featured-properties">
+        <div class="container">
+            <h2 class="section-title">Featured Properties</h2>
+            <div class="grid grid-3 property-grid">
+                <!-- Properties will be loaded dynamically from the database -->
+                <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #546e7a;">
+                    <p>Loading properties...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials section">
+        <div class="container">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card card animate-on-scroll">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I saved over $15,000 in agent fees by connecting directly with the seller. The platform made everything transparent and easy!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Home Buyer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card card animate-on-scroll">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"No more agent commissions! I sold my house directly to the buyer and kept every dollar. This platform is a game-changer for sellers."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Property Seller</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card card animate-on-scroll">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Finally, a platform where I can negotiate directly with landlords. No agent fees, no middleman markups. Just straightforward deals."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">E</div>
+                        <div class="author-info">
+                            <h4>Emily Rodriguez</h4>
+                            <p>Apartment Renter</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section section">
+        <div class="container">
+            <div class="cta-card card text-center">
+                <h2>Save Thousands in Agent Fees</h2>
+                <p>Join the peer-to-peer revolution. Connect directly with property owners and buyers - no commissions, no agents</p>
+                <a href="pages/signup.html" class="btn btn-primary animate-pulse">Get Started Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RentEase 2.0</h3>
+                    <p>The peer-to-peer property marketplace. Connect directly with owners and buyers - no agents, no commission fees.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="pages/about.html">About Us</a>
+                    <a href="pages/contact.html">Contact</a>
+                    <a href="pages/login.html">Login</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📧 info@rentease.com</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>📍 123 Real Estate Ave, City</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Stay updated with latest properties</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Your email" class="newsletter-input" required>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RentEase 2.0. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

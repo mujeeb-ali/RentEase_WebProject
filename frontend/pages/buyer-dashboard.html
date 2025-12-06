@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard - RentEase 2.0</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">RentEase 2.0</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="buyer-dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="chat.html">Messages</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-section section">
+        <div class="container">
+            <!-- Welcome Header -->
+            <div class="dashboard-header animate-slide-left">
+                <div>
+                    <h1>Welcome, <span id="userName">User</span>!</h1>
+                    <p class="text-muted">Role: <span id="userRole">Buyer/Tenant</span></p>
+                </div>
+                <a href="../index.html" class="btn btn-primary">🔍 Browse Properties</a>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid grid grid-4">
+                <div class="stat-card card">
+                    <div class="stat-icon">🏠</div>
+                    <div class="stat-info">
+                        <h3 id="totalProperties">0</h3>
+                        <p>Properties Viewed</p>
+                    </div>
+                </div>
+                <div class="stat-card card">
+                    <div class="stat-icon">❤️</div>
+                    <div class="stat-info">
+                        <h3 id="totalFavorites">0</h3>
+                        <p>Favorites</p>
+                    </div>
+                </div>
+                <div class="stat-card card">
+                    <div class="stat-icon">💬</div>
+                    <div class="stat-info">
+                        <h3 id="totalMessages">0</h3>
+                        <p>Messages</p>
+                    </div>
+                </div>
+                <div class="stat-card card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-info">
+                        <h3 id="totalTours">0</h3>
+                        <p>Scheduled Tours</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Properties -->
+            <div class="dashboard-card card">
+                <div class="card-header">
+                    <h2>Available Properties</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="rent">Rent</button>
+                        <button class="filter-btn" data-filter="sale">Sale</button>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="properties-table">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="propertiesTableBody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 2rem;">
+                                    Loading properties...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-card card">
+                <div class="card-header">
+                    <h2>Recent Activity</h2>
+                </div>
+                
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <span class="activity-icon">👁️</span>
+                        <div class="activity-content">
+                            <p><strong>Modern Villa</strong> viewed</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-icon">💬</span>
+                        <div class="activity-content">
+                            <p>New message from <strong>Property Owner</strong></p>
+                            <span class="activity-time">5 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-icon">❤️</span>
+                        <div class="activity-content">
+                            <p><strong>Luxury Apartment</strong> added to favorites</p>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RentEase 2.0</h3>
+                    <p>Your trusted platform for buying, selling, and renting properties.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="../index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📧 info@rentease.com</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>📍 123 Real Estate Ave, City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RentEase 2.0. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
