@@ -7,12 +7,12 @@ window.CONFIG = {
     // API Base URL
     API_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:5000/api'
-        : 'https://your-production-domain.com/api',
+        : 'https://rentease-backend-production.up.railway.app',
     
     // Socket.io URL
     SOCKET_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:5000'
-        : 'https://your-production-domain.com',
+        : 'https://rentease-backend-production.up.railway.app',
     
     // App Settings
     MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
