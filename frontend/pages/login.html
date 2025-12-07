@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RentEase 2.0</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">RentEase 2.0</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html" class="active">Login</a></li>
+                <li><a href="signup.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="auth-section section">
+        <div class="container">
+            <div class="auth-wrapper">
+                <div class="auth-card card animate-slide-left">
+                    <h2 class="auth-title">Welcome Back</h2>
+                    <p class="auth-subtitle">Login to access your dashboard</p>
+                    
+                    <form class="auth-form" id="loginForm">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="remember">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" class="forgot-link">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+
+                    <div class="auth-divider">
+                        <span>Don't have an account? <a href="signup.html" class="auth-link">Sign up here</a></span>
+                    </div>
+                </div>
+
+                <div class="auth-info animate-slide-right">
+                    <h2>Find Your Perfect Property</h2>
+                    <div class="info-features">
+                        <div class="info-feature">
+                            <span class="info-icon">✓</span>
+                            <p>Access thousands of properties</p>
+                        </div>
+                        <div class="info-feature">
+                            <span class="info-icon">✓</span>
+                            <p>Direct chat with owners</p>
+                        </div>
+                        <div class="info-feature">
+                            <span class="info-icon">✓</span>
+                            <p>Secure transactions</p>
+                        </div>
+                        <div class="info-feature">
+                            <span class="info-icon">✓</span>
+                            <p>24/7 customer support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RentEase 2.0</h3>
+                    <p>Your trusted platform for buying, selling, and renting properties.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="../index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="login.html">Login</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📧 info@rentease.com</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>📍 123 Real Estate Ave, City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RentEase 2.0. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

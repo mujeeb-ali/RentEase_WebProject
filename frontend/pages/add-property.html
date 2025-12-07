@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Property - RentEase 2.0</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/property-form.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">RentEase 2.0</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="add-property.html" class="active">Add Property</a></li>
+                <li><a href="chat.html">Messages</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Add Property Form -->
+    <section class="property-form-section section">
+        <div class="container">
+            <div class="form-header">
+                <h1>Add New Property</h1>
+                <p>Fill in the details below to list your property</p>
+            </div>
+
+            <form class="property-form card" id="addPropertyForm">
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <h2 class="section-heading">Basic Information</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="propertyTitle">Property Title *</label>
+                            <input type="text" class="form-control" id="propertyTitle" placeholder="e.g., Modern 3-Bedroom Villa" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="propertyType">Property Type *</label>
+                            <select class="form-control" id="propertyType" required>
+                                <option value="">Select Type</option>
+                                <option value="house">House</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="villa">Villa</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="land">Land</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Category *</label>
+                            <select class="form-control" id="category" required>
+                                <option value="">Select Category</option>
+                                <option value="rent">For Rent</option>
+                                <option value="sale">For Sale</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="price">Price *</label>
+                            <input type="number" class="form-control" id="price" placeholder="Enter price" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="area">Area (sq ft) *</label>
+                            <input type="number" class="form-control" id="area" placeholder="e.g., 2500" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Details -->
+                <div class="form-section">
+                    <h2 class="section-heading">Property Details</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bedrooms">Bedrooms</label>
+                            <input type="number" class="form-control" id="bedrooms" placeholder="Number of bedrooms" min="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bathrooms">Bathrooms</label>
+                            <input type="number" class="form-control" id="bathrooms" placeholder="Number of bathrooms" min="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="parking">Parking Spaces</label>
+                            <input type="number" class="form-control" id="parking" placeholder="Parking spaces" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea class="form-control" id="description" rows="5" placeholder="Describe your property in detail..." required></textarea>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="form-section">
+                    <h2 class="section-heading">Location</h2>
+                    
+                    <div class="form-group">
+                        <label for="address">Full Address *</label>
+                        <input type="text" class="form-control" id="address" placeholder="Street address" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" class="form-control" id="city" placeholder="City" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state">State *</label>
+                            <input type="text" class="form-control" id="state" placeholder="State" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="zipcode">Zip Code *</label>
+                            <input type="text" class="form-control" id="zipcode" placeholder="Zip code" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amenities -->
+                <div class="form-section">
+                    <h2 class="section-heading">Amenities</h2>
+                    
+                    <div class="amenities-grid">
+                        <label class="checkbox-label amenity-item">
+                            <input type="checkbox" name="amenities" value="air-conditioning">
+                            <span>Air Conditioning</span>
+                        </label>
+                        <label class="checkbox-label amenity-item">
+                            <input type="checkbox" name="amenities" value="heating">
+                            <span>Heating</span>
+                        </label>
+                        <label class="checkbox-label amenity-item">
+                            <input type="checkbox" name="amenities" value="garden">
+                            <span>Garden</span>
+                        </label>
+                        <label class="checkbox-label amenity-item">
+                            <input type="checkbox" name="amenities" value="pool">
+                            <span>Swimming Pool</span>
+                        </label>
+                        <label class="checkbox-label amenity-item">
+                            <input type="checkbox" name="amenities" value="gym">
+                            <span>Gym</span>
+                        </label>
+                        <label class="checkbox-label amenity-item">
+                            <input type="checkbox" name="amenities" value="security">
+                            <span>24/7 Security</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Images -->
+                <div class="form-section">
+                    <h2 class="section-heading">Property Images</h2>
+                    
+                    <div class="form-group">
+                        <label for="images">Upload Images</label>
+                        <input type="file" class="form-control" id="images" accept="image/*" multiple>
+                        <small class="text-muted">You can upload multiple images (Max 10 images)</small>
+                    </div>
+
+                    <div id="imagePreview" class="image-preview-grid"></div>
+                </div>
+
+                <!-- Submit Buttons -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='dashboard.html'">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Publish Property</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RentEase 2.0</h3>
+                    <p>Your trusted platform for buying, selling, and renting properties.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="../index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📧 info@rentease.com</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>📍 123 Real Estate Ave, City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 RentEase 2.0. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/property-form.js"></script>
+</body>
+</html>
