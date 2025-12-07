@@ -1,15 +1,31 @@
 {
-  "version": 2,
-  "builds": [
+  "services": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
+      "type": "web",
+      "name": "rentease-backend",
+      "env": "node",
+      "plan": "free",
+      "buildCommand": "npm install",
+      "startCommand": "npm start",
+      "healthCheckPath": "/api/health",
+      "envVars": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "MONGODB_URI",
+          "sync": false
+        },
+        {
+          "key": "JWT_SECRET",
+          "generateValue": true
+        },
+        {
+          "key": "PORT",
+          "value": "5000"
+        }
+      ]
     }
   ]
 }
