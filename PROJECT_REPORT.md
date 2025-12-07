@@ -608,25 +608,25 @@ RentEase 2.0 successfully achieves its goal of creating a peer-to-peer property 
 
 ## 📅 Project Timeline
 
-### Phase 1: Planning & Design (Month 1-2)
+### Phase 1: Planning & Design 
 - Requirements gathering
 - Database schema design
 - UI/UX mockups
 - Technology stack selection
 
-### Phase 2: Core Development (Month 3-4)
+### Phase 2: Core Development
 - Backend API development
 - Database setup
 - User authentication
 - Property management
 
-### Phase 3: Advanced Features (Month 5)
+### Phase 3: Advanced Features 
 - Real-time chat implementation
 - Dashboard development
 - Image handling
 - Responsive design
 
-### Phase 4: Testing & Deployment (Month 6)
+### Phase 4: Testing & Deployment 
 - Bug fixes
 - Security hardening
 - Performance optimization
