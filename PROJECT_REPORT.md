@@ -614,7 +614,7 @@ RentEase 2.0 successfully achieves its goal of creating a peer-to-peer property 
 - UI/UX mockups
 - Technology stack selection
 
-### Phase 2: Core Development
+### Phase 2: Core Development (Month 3-4)
 - Backend API development
 - Database setup
 - User authentication
@@ -626,7 +626,7 @@ RentEase 2.0 successfully achieves its goal of creating a peer-to-peer property 
 - Image handling
 - Responsive design
 
-### Phase 4: Testing & Deployment 
+### Phase 4: Testing & Deployment (Month 6)
 - Bug fixes
 - Security hardening
 - Performance optimization
