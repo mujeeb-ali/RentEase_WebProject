@@ -21,10 +21,16 @@
 .dashboard-header h1 {
     font-size: var(--font-size-2xl);
     margin-bottom: var(--spacing-xs);
+    color: #ffffff;
 }
 
 .dashboard-header span {
-    color: var(--white);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.dashboard-header .text-muted {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--font-size-sm);
 }
 
 /* Stats Grid */
@@ -52,13 +58,15 @@
 
 .stat-info h3 {
     font-size: var(--font-size-2xl);
-    color: var(--white);
+    color: #2c3e50 !important;
     margin-bottom: var(--spacing-xs);
+    font-weight: 700;
 }
 
 .stat-info p {
-    color: var(--text-secondary);
+    color: #546e7a !important;
     font-size: var(--font-size-sm);
+    font-weight: 500;
 }
 
 /* Dashboard Card */
@@ -77,7 +85,8 @@
 
 .card-header h2 {
     font-size: var(--font-size-xl);
-    color: var(--white);
+    color: #2c3e50;
+    font-weight: 600;
 }
 
 /* Filter Buttons */
@@ -88,24 +97,28 @@
 
 .filter-btn {
     padding: var(--spacing-xs) var(--spacing-md);
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #2c3e50;
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: var(--transition-normal);
     font-size: var(--font-size-sm);
+    font-weight: 600;
 }
 
 .filter-btn:hover {
-    border-color: var(--white);
-    color: var(--white);
+    border-color: #16a085;
+    color: #16a085;
+    background: rgba(22, 160, 133, 0.1);
+    transform: translateY(-1px);
 }
 
 .filter-btn.active {
     background: var(--gradient-primary);
     border-color: transparent;
-    color: var(--white);
+    color: #ffffff;
+    font-weight: 700;
 }
 
 /* Properties Table */
@@ -121,16 +134,16 @@
 .properties-table th {
     text-align: left;
     padding: var(--spacing-md);
-    color: var(--text-secondary);
+    color: #546e7a !important;
     font-size: var(--font-size-sm);
     font-weight: 600;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .properties-table td {
     padding: var(--spacing-md);
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-primary);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: #2c3e50 !important;
 }
 
 .properties-table tbody tr {
@@ -153,12 +166,19 @@
 
 .property-cell strong {
     display: block;
-    color: var(--white);
+    color: #2c3e50 !important;
     margin-bottom: 2px;
+    font-weight: 600;
 }
 
 .property-cell .text-muted {
     font-size: var(--font-size-sm);
+    color: #95a5a6 !important;
+}
+
+.property-cell p,
+.property-cell span {
+    color: #546e7a !important;
 }
 
 /* Badge */
@@ -172,12 +192,14 @@
 
 .badge-sale {
     background: var(--gradient-primary);
-    color: var(--white);
+    color: #ffffff;
+    font-weight: 600;
 }
 
 .badge-rent {
     background: linear-gradient(135deg, #02203E 0%, #020B16 100%);
-    color: var(--white);
+    color: #ffffff;
+    font-weight: 600;
 }
 
 /* Status */
@@ -204,7 +226,7 @@
 
 .action-btn {
     background: transparent;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     padding: var(--spacing-xs);
     width: 32px;
     height: 32px;
@@ -212,12 +234,14 @@
     cursor: pointer;
     transition: var(--transition-normal);
     font-size: 1rem;
+    color: #2c3e50;
 }
 
 .action-btn:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: var(--white);
+    border-color: #16a085;
     transform: translateY(-2px);
+    color: #16a085;
 }
 
 /* Activity List */
@@ -258,16 +282,17 @@
 }
 
 .activity-content p {
-    color: var(--text-primary);
+    color: #2c3e50;
     margin-bottom: var(--spacing-xs);
 }
 
 .activity-content strong {
-    color: var(--white);
+    color: #2c3e50;
+    font-weight: 600;
 }
 
 .activity-time {
-    color: var(--text-muted);
+    color: #95a5a6;
     font-size: var(--font-size-sm);
 }
 

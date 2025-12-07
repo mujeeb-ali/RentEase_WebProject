@@ -16,14 +16,17 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Token present:', !!user?.token);
     
     if (user) {
-        // Redirect to role-specific dashboard
+        // Redirect to role-specific dashboard ONLY if on wrong page
         const currentPage = window.location.pathname;
+        const isOnBuyerDashboard = currentPage.includes('buyer-dashboard');
+        const isOnOwnerDashboard = currentPage.includes('dashboard.html') && !isOnBuyerDashboard;
         
-        if (user.role === 'tenant' && !currentPage.includes('buyer-dashboard')) {
-            window.location.href = 'buyer-dashboard.html';
+        // Only redirect if user is on the wrong dashboard
+        if (user.role === 'tenant' && isOnOwnerDashboard) {
+            window.location.replace('buyer-dashboard.html');
             return;
-        } else if (user.role === 'owner' && currentPage.includes('buyer-dashboard')) {
-            window.location.href = 'dashboard.html';
+        } else if (user.role === 'owner' && isOnBuyerDashboard) {
+            window.location.replace('dashboard.html');
             return;
         }
         
@@ -40,9 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Show/Hide elements based on role
         handleRoleBasedUI(user.role);
-        
-        // Initialize filter buttons
-        initializeFilterButtons();
         
         // Load properties
         loadProperties();
@@ -102,8 +102,9 @@ async function loadProperties() {
         console.log('Properties loaded:', data.properties?.length || 0);
         
         if (response.ok && data.properties) {
-            allProperties = data.properties;
-            applyFilter();
+            allProperties = data.properties; // Store globally for filtering
+            updateStats(data.properties);
+            renderPropertiesTable(data.properties, user.role);
         } else {
             console.error('Failed to load properties:', data);
             window.rentease.utils.showNotification('Failed to load properties', 'error');
@@ -120,14 +121,24 @@ function updateStats(properties) {
     const totalViews = properties.reduce((sum, prop) => sum + (prop.views || 0), 0);
     const totalMessages = properties.reduce((sum, prop) => sum + (prop.messages || 0), 0);
     
-    // Only update if elements exist (owner dashboard has these, buyer dashboard might not)
-    const totalPropertiesEl = document.getElementById('totalProperties');
-    const totalViewsEl = document.getElementById('totalViews');
-    const totalMessagesEl = document.getElementById('totalMessages');
+    // Update common stats
+    if (document.getElementById('totalProperties')) {
+        document.getElementById('totalProperties').textContent = totalProperties;
+    }
+    if (document.getElementById('totalViews')) {
+        document.getElementById('totalViews').textContent = totalViews.toLocaleString();
+    }
+    if (document.getElementById('totalMessages')) {
+        document.getElementById('totalMessages').textContent = totalMessages;
+    }
     
-    if (totalPropertiesEl) totalPropertiesEl.textContent = totalProperties;
-    if (totalViewsEl) totalViewsEl.textContent = totalViews.toLocaleString();
-    if (totalMessagesEl) totalMessagesEl.textContent = totalMessages;
+    // Update buyer-specific stats (set to 0 for now)
+    if (document.getElementById('totalFavorites')) {
+        document.getElementById('totalFavorites').textContent = '0';
+    }
+    if (document.getElementById('totalTours')) {
+        document.getElementById('totalTours').textContent = '0';
+    }
 }
 
 // Render Properties Table
@@ -135,7 +146,7 @@ function renderPropertiesTable(properties, role) {
     const tbody = document.getElementById('propertiesTableBody');
     
     if (properties.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem;">No properties found</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: #546e7a;">No properties found</td></tr>';
         return;
     }
     
@@ -161,7 +172,7 @@ function renderPropertiesTable(properties, role) {
                 <td>${prop.type}</td>
                 <td><span class="badge badge-${prop.category}">${prop.category}</span></td>
                 <td>$${prop.price.toLocaleString()}</td>
-                <td><span class="status-${prop.status}">${prop.status}</span></td>
+                <td>${prop.city || prop.location || 'N/A'}</td>
                 <td>
                     <div class="action-buttons">
                         ${actions}
@@ -185,43 +196,25 @@ function getPropertyEmoji(type) {
 }
 
 // Filter Properties
-let allProperties = [];
-let currentFilter = 'all';
+let allProperties = []; // Store all properties globally
 
-function initializeFilterButtons() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    console.log('Initializing filter buttons:', filterButtons.length);
-    
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            filterButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            currentFilter = this.dataset.filter;
-            console.log('Filter clicked:', currentFilter);
-            applyFilter();
-        });
+const filterButtons = document.querySelectorAll('.filter-btn');
+filterButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        const filter = this.dataset.filter;
+        
+        // Filter properties based on category
+        if (filter === 'all') {
+            renderPropertiesTable(allProperties, window.rentease.utils.getUser().role);
+        } else {
+            const filtered = allProperties.filter(prop => prop.category.toLowerCase() === filter.toLowerCase());
+            renderPropertiesTable(filtered, window.rentease.utils.getUser().role);
+        }
     });
-}
-
-function applyFilter() {
-    const user = window.rentease.utils.getUser();
-    
-    if (!allProperties || allProperties.length === 0) {
-        console.log('No properties to filter');
-        return;
-    }
-    
-    let filteredProperties = allProperties;
-    
-    if (currentFilter !== 'all') {
-        filteredProperties = allProperties.filter(prop => prop.category === currentFilter);
-    }
-    
-    console.log('Filtered properties:', filteredProperties.length, 'out of', allProperties.length);
-    updateStats(filteredProperties);
-    renderPropertiesTable(filteredProperties, user.role);
-}
+});
 
 // Property Actions
 window.viewProperty = function(id) {

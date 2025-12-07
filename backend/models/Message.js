@@ -17,10 +17,22 @@ const messageSchema = new mongoose.Schema({
     },
     text: {
         type: String,
-        required: [true, 'Message text is required'],
         trim: true
     },
+    image: {
+        type: String,
+        default: null
+    },
+    mediaType: {
+        type: String,
+        enum: ['image', 'video', null],
+        default: null
+    },
     isRead: {
+        type: Boolean,
+        default: false
+    },
+    isDelivered: {
         type: Boolean,
         default: false
     },

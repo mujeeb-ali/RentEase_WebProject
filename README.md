@@ -494,4 +494,4 @@ This project demonstrates:
 
 ---
 
-**Built with ❤️ By Mujeeb Ur Rehman**
+**Built with ❤️ for learning and demonstration purposes**

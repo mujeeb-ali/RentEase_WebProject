@@ -2,6 +2,28 @@
 // Home Page JavaScript
 // ===================================
 
+// Update hero buttons based on login status
+function updateHeroButtons() {
+    const user = window.rentease?.utils.getUser();
+    const heroButtons = document.querySelector('.hero-buttons');
+    const ctaButton = document.getElementById('ctaButton');
+    
+    if (user && heroButtons) {
+        const dashboardLink = user.role === 'owner' ? 'pages/dashboard.html' : 'pages/buyer-dashboard.html';
+        heroButtons.innerHTML = `
+            <a href="${dashboardLink}" class="btn btn-primary">Go to Dashboard</a>
+            <a href="#featured" class="btn btn-secondary">Browse Properties</a>
+        `;
+    }
+    
+    // Update CTA button for logged-in users
+    if (user && ctaButton) {
+        const dashboardLink = user.role === 'owner' ? 'pages/dashboard.html' : 'pages/buyer-dashboard.html';
+        ctaButton.href = dashboardLink;
+        ctaButton.textContent = 'Go to Dashboard';
+    }
+}
+
 // Hero Image Slider
 function initHeroSlider() {
     const slides = document.querySelectorAll('.hero-slide');
@@ -145,6 +167,10 @@ function initNewsletterForm() {
 // Load Featured Properties
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing...');
+    
+    // Update hero buttons based on login status
+    updateHeroButtons();
+    
     initHeroSlider();
     initScrollAnimations();
     initBackToTop();

@@ -20,6 +20,7 @@ const messageRoutes = require('./routes/messageRoutes');
 
 // Import models
 const Message = require('./models/Message');
+const User = require('./models/User');
 
 // Initialize Express app
 const app = express();
@@ -103,38 +104,70 @@ app.get('/api/health', (req, res) => {
 });
 
 // Socket.io Connection Handling
-const users = new Map(); // Store connected users
+const users = new Map(); // Store connected users: userId => { socketId, status }
 
 io.on('connection', (socket) => {
     console.log(`✅ User connected: ${socket.id}`);
 
     // User joins with their ID
-    socket.on('join', (userId) => {
-        users.set(userId, socket.id);
+    socket.on('join', async (userId) => {
+        users.set(userId, { socketId: socket.id, status: 'online' });
         socket.join(userId);
         console.log(`User ${userId} joined room`);
+        
+        // Update user online status in database
+        try {
+            await User.updateOne({ _id: userId }, { isOnline: true, lastSeen: new Date() });
+            // Broadcast online status to all users
+            io.emit('userStatusChange', { userId, status: 'online' });
+        } catch (error) {
+            console.error('Error updating user status:', error);
+        }
     });
 
     // Handle sending message
     socket.on('sendMessage', async (message) => {
         try {
+            // Check message size (MongoDB BSON limit is 16MB)
+            const messageSize = JSON.stringify(message).length;
+            const maxSize = 15 * 1024 * 1024; // 15MB to be safe
+            
+            if (messageSize > maxSize) {
+                socket.emit('error', {
+                    message: `Message too large (${(messageSize / 1024 / 1024).toFixed(1)}MB). Maximum is 15MB.`
+                });
+                console.log(`Message rejected: too large (${(messageSize / 1024 / 1024).toFixed(1)}MB)`);
+                return;
+            }
+            
             // Save message to database
             const savedMessage = await Message.create({
                 senderId: message.senderId,
                 receiverId: message.receiverId,
-                text: message.text
+                text: message.text,
+                image: message.image || null,
+                mediaType: message.mediaType || null,
+                isDelivered: false
             });
 
             // Get receiver's socket ID
-            const receiverSocketId = users.get(message.receiverId);
+            const receiverData = users.get(message.receiverId);
             
             // Emit to receiver if online
-            if (receiverSocketId) {
-                io.to(receiverSocketId).emit('receiveMessage', {
+            if (receiverData) {
+                // Mark as delivered
+                await Message.updateOne({ _id: savedMessage._id }, { isDelivered: true });
+                
+                io.to(receiverData.socketId).emit('receiveMessage', {
                     ...message,
                     _id: savedMessage._id,
-                    createdAt: savedMessage.createdAt
+                    createdAt: savedMessage.createdAt,
+                    isDelivered: true
                 });
+                
+                // Send delivery confirmation to sender
+                socket.emit('messageDelivered', { messageId: savedMessage._id });
+                
                 console.log(`Message sent from ${message.senderId} to ${message.receiverId}`);
             } else {
                 console.log(`User ${message.receiverId} is offline`);
@@ -143,39 +176,62 @@ io.on('connection', (socket) => {
             // Confirm to sender
             socket.emit('messageSent', {
                 success: true,
-                messageId: savedMessage._id
+                messageId: savedMessage._id,
+                isDelivered: !!receiverData
             });
 
         } catch (error) {
             console.error('Error sending message:', error);
             socket.emit('error', {
-                message: 'Failed to send message'
+                message: 'Failed to send message: ' + error.message
             });
+        }
+    });
+
+    // Handle message read event
+    socket.on('messageRead', async ({ messageId, senderId, receiverId }) => {
+        try {
+            await Message.updateOne({ _id: messageId }, { isRead: true });
+            
+            // Notify sender that message was read
+            const senderData = users.get(senderId);
+            if (senderData) {
+                io.to(senderData.socketId).emit('messageReadConfirm', { messageId, receiverId });
+            }
+        } catch (error) {
+            console.error('Error marking message as read:', error);
         }
     });
 
     // Handle typing indicator
     socket.on('typing', ({ senderId, receiverId }) => {
-        const receiverSocketId = users.get(receiverId);
-        if (receiverSocketId) {
-            io.to(receiverSocketId).emit('userTyping', { senderId });
+        const receiverData = users.get(receiverId);
+        if (receiverData) {
+            io.to(receiverData.socketId).emit('userTyping', { senderId });
         }
     });
 
     // Handle stop typing
     socket.on('stopTyping', ({ senderId, receiverId }) => {
-        const receiverSocketId = users.get(receiverId);
-        if (receiverSocketId) {
-            io.to(receiverSocketId).emit('userStoppedTyping', { senderId });
+        const receiverData = users.get(receiverId);
+        if (receiverData) {
+            io.to(receiverData.socketId).emit('userStoppedTyping', { senderId });
         }
     });
 
     // Handle disconnect
-    socket.on('disconnect', () => {
-        // Remove user from online users
-        for (const [userId, socketId] of users.entries()) {
-            if (socketId === socket.id) {
+    socket.on('disconnect', async () => {
+        // Remove user from online users and update status
+        for (const [userId, userData] of users.entries()) {
+            if (userData.socketId === socket.id) {
                 users.delete(userId);
+                try {
+                    await User.updateOne({ _id: userId }, { isOnline: false, lastSeen: new Date() });
+                    // Broadcast offline status
+                    io.emit('userStatusChange', { userId, status: 'offline', lastSeen: new Date() });
+                } catch (error) {
+                    console.error('Error updating user offline status:', error);
+                }
                 console.log(`❌ User ${userId} disconnected`);
                 break;
             }

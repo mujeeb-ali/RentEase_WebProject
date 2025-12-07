@@ -2,8 +2,133 @@
 // Main JavaScript - Global Functions
 // ===================================
 
+// Utility Functions
+const utils = {
+    // Show notification
+    showNotification: function(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.style.cssText = `
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: ${type === 'success' ? '#4ade80' : '#f87171'};
+            color: #020B16;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    },
+
+    // Format currency
+    formatCurrency: function(amount) {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        }).format(amount);
+    },
+
+    // Format date
+    formatDate: function(date) {
+        return new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }).format(new Date(date));
+    },
+
+    // Get user from localStorage or sessionStorage
+    getUser: function() {
+        const user = localStorage.getItem('rentease_user') || sessionStorage.getItem('rentease_user');
+        return user ? JSON.parse(user) : null;
+    },
+
+    // Save user to localStorage
+    saveUser: function(user) {
+        localStorage.setItem('rentease_user', JSON.stringify(user));
+    },
+
+    // Remove user from localStorage and sessionStorage
+    removeUser: function() {
+        localStorage.removeItem('rentease_user');
+        sessionStorage.removeItem('rentease_user');
+    },
+
+    // Check if user is logged in
+    isLoggedIn: function() {
+        return this.getUser() !== null;
+    },
+
+    // Redirect to login if not authenticated
+    requireAuth: function() {
+        if (!this.isLoggedIn()) {
+            window.location.href = '../pages/login.html';
+        }
+    }
+};
+
+// Export utils for other scripts
+window.rentease = { utils };
+
+// Update navbar based on login status (works on all pages)
+function updateNavbar() {
+    const user = utils.getUser();
+    const navLinks = document.getElementById('navLinks');
+    
+    if (!navLinks) return;
+    
+    // Determine if we're in the pages folder or root
+    const isInPagesFolder = window.location.pathname.includes('/pages/');
+    const homeLink = isInPagesFolder ? '../index.html' : 'index.html';
+    const aboutLink = isInPagesFolder ? 'about.html' : 'pages/about.html';
+    const contactLink = isInPagesFolder ? 'contact.html' : 'pages/contact.html';
+    
+    if (user) {
+        // Logged in navbar - same across all pages
+        const dashboardLink = isInPagesFolder 
+            ? (user.role === 'owner' ? 'dashboard.html' : 'buyer-dashboard.html')
+            : (user.role === 'owner' ? 'pages/dashboard.html' : 'pages/buyer-dashboard.html');
+        const chatLink = isInPagesFolder ? 'chat.html' : 'pages/chat.html';
+        
+        navLinks.innerHTML = `
+            <li><a href="${homeLink}">Home</a></li>
+            <li><a href="${aboutLink}">About</a></li>
+            <li><a href="${contactLink}">Contact</a></li>
+            <li><a href="${dashboardLink}">Dashboard</a></li>
+            <li><a href="${chatLink}">Messages</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+        `;
+        
+        // Add logout functionality
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                utils.removeUser();
+                utils.showNotification('Logged out successfully', 'success');
+                setTimeout(() => {
+                    window.location.href = homeLink;
+                }, 1000);
+            });
+        }
+    }
+}
+
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
+    // Update navbar based on login status
+    updateNavbar();
+    
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
 
@@ -82,80 +207,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Utility Functions
-const utils = {
-    // Show notification
-    showNotification: function(message, type = 'success') {
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.style.cssText = `
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: ${type === 'success' ? '#4ade80' : '#f87171'};
-            color: #020B16;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-            z-index: 9999;
-            animation: slideInRight 0.3s ease;
-            max-width: 300px;
-        `;
-        notification.textContent = message;
-        document.body.appendChild(notification);
-
-        setTimeout(() => {
-            notification.style.animation = 'slideOutRight 0.3s ease';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    },
-
-    // Format currency
-    formatCurrency: function(amount) {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        }).format(amount);
-    },
-
-    // Format date
-    formatDate: function(date) {
-        return new Intl.DateTimeFormat('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        }).format(new Date(date));
-    },
-
-    // Get user from localStorage
-    getUser: function() {
-        const user = localStorage.getItem('rentease_user');
-        return user ? JSON.parse(user) : null;
-    },
-
-    // Save user to localStorage
-    saveUser: function(user) {
-        localStorage.setItem('rentease_user', JSON.stringify(user));
-    },
-
-    // Remove user from localStorage
-    removeUser: function() {
-        localStorage.removeItem('rentease_user');
-    },
-
-    // Check if user is logged in
-    isLoggedIn: function() {
-        return this.getUser() !== null;
-    },
-
-    // Redirect to login if not authenticated
-    requireAuth: function() {
-        if (!this.isLoggedIn()) {
-            window.location.href = '../pages/login.html';
-        }
-    }
-};
-
 // Add CSS animations
 const style = document.createElement('style');
 style.textContent = `
@@ -183,5 +234,4 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Export utils for other scripts
-window.rentease = { utils };
+
