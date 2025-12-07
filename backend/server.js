@@ -25,7 +25,8 @@ const User = require('./models/User');
 // Initialize Express app
 const app = express();
 const server = http.createServer(app);
-
+// Trust proxy - Required for Railway, Render, Heroku, etc.
+app.set('trust proxy', 1);
 // Initialize Socket.io with proper CORS
 const allowedOrigins = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['http://localhost:3000'];
 
