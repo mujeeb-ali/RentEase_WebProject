@@ -1,0 +1,42 @@
+# Environment Variables - NEVER COMMIT THIS FILE
+.env
+.env.production
+.env.local
+
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime
+pids/
+*.pid
+*.seed
+
+# Testing
+coverage/
+
+# Production
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads
+uploads/
+public/uploads/
+
+# Misc
+.cache/
+temp/
